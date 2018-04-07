@@ -17,6 +17,10 @@ import {
     IScrolledDownAndWhatHappenedNextShockedMe,
 } from './src/practice'
 
+import TimeCounter from './src/timecounter'
+
+import { Home } from './src/todolist'
+
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
     android:
@@ -29,7 +33,7 @@ export default class App extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <IScrolledDownAndWhatHappenedNextShockedMe />
+                <Home />
             </View>
         )
     }

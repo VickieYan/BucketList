@@ -8,13 +8,26 @@
     "preview": "react-native run-ios"
   },
   "dependencies": {
+    "@expo/vector-icons": "^6.3.1",
+    "autobind-decorator": "^2.1.0",
+    "mobx": "^4.1.1",
+    "mobx-react": "^5.0.0",
     "react": "^16.3.0-alpha.0",
-    "react-native": "0.52.0"
+    "react-native": "0.52.0",
+    "react-native-deprecated-custom-components": "^0.1.2",
+    "react-native-elements": "^0.19.1",
+    "react-native-linear-gradient": "^2.4.0",
+    "react-native-swipeout": "^2.3.3",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "watchman": "^1.0.0"
   },
   "devDependencies": {
     "babel-jest": "22.4.3",
     "babel-preset-react-native": "4.0.0",
+    "babel-preset-react-native-stage-0": "^1.0.1",
     "jest": "22.4.3",
+    "react-native-vector-icons": "4.4.2",
     "react-test-renderer": "^16.3.0-alpha.0"
   },
   "jest": {
