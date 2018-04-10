@@ -12,7 +12,7 @@ class ParallaxScrollView extends Component {
         return (
             <View style={[styles.content, { height: windowHeight }]}>
                 <Image
-                    style={{ height: windowHeight }}
+                    style={{ height: windowHeight, width: 400 }}
                     source={backgroundSource}
                 />
                 {headerView}

@@ -16,7 +16,8 @@ class TimeCounter extends Component {
             currentIndex: 0,
             isStart: false,
             startTime: null,
-            currentTime: '00:00:00',
+            timeSpan: null,
+            totalTime: null,
         }
         this.time1 = null
         this.handleToggle = this.handleToggle.bind(this)
@@ -28,9 +29,9 @@ class TimeCounter extends Component {
     getTimeSpan(startTime) {
         const endTime = new Date().getTime()
         const timeSpan = endTime - startTime
-        this.setState({
-            currentTime: this.timeFormate(timeSpan),
-        })
+        this.setState(prevState => ({
+            timeSpan: timeSpan + prevState.totalTime,
+        }))
     }
 
     timeFormate(mili) {
@@ -50,14 +51,18 @@ class TimeCounter extends Component {
     handleToggle() {
         const isStart = !this.state.isStart
         const records = this.state.records.slice()
-        const { currentIndex, currentTime } = this.state
+        const { currentIndex, timeSpan } = this.state
         if (isStart) {
-            if (!this.state.startTime) {
-                const startTime = new Date().getTime()
-                this.setState({
-                    startTime,
-                })
-            }
+            // if (!this.state.startTime) {
+            //     const startTime = new Date().getTime()
+            //     this.setState({
+            //         startTime,
+            //     })
+            // }
+            const startTime = new Date().getTime()
+            this.setState({
+                startTime,
+            })
             // 开启定时器
             this.time1 = setInterval(
                 () => this.getTimeSpan(this.state.startTime || startTime),
@@ -68,10 +73,11 @@ class TimeCounter extends Component {
             clearInterval(this.time1)
             records.push({
                 index: currentIndex + 1,
-                time: currentTime,
+                time: this.timeFormate(timeSpan),
             })
             this.setState({
                 records,
+                totalTime: this.state.timeSpan,
                 currentIndex: currentIndex + 1,
             })
         }
@@ -86,15 +92,18 @@ class TimeCounter extends Component {
             currentIndex: 0,
             isStart: false,
             startTime: null,
-            currentTime: '00:00:00',
+            timeSpan: null,
+            totalTime: null,
         })
     }
 
     render() {
-        const { records, currentTime } = this.state
+        const { records, timeSpan } = this.state
         return (
             <View style={styles.container}>
-                <Text style={styles.timePreview}>{currentTime}</Text>
+                <Text style={styles.timePreview}>
+                    {this.timeFormate(timeSpan)}
+                </Text>
                 <View style={styles.timeControllArea}>
                     <View style={styles.timeControllWrapper}>
                         <Button

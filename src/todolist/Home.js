@@ -50,6 +50,7 @@ class Home extends Component {
         this.handleDelete = this.handleDelete.bind(this)
         this.hanleShowModal = this.hanleShowModal.bind(this)
         this.handleConfirm = this.handleConfirm.bind(this)
+        this.handleEdit = this.handleEdit.bind(this)
     }
 
     handlePress(index) {
@@ -99,13 +100,56 @@ class Home extends Component {
         })
     }
 
+    handleEdit(type, val) {
+        const { indexOfModal } = this.state
+        const todos = this.state.todos.slice()
+        todos[indexOfModal][type] = val
+        this.setState({
+            todos,
+        })
+    }
+
+    formateDate() {
+        const weeks = [
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+        ]
+        const months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ]
+        const date = new Date()
+        // 星期
+        const week = date.getDay()
+        // 月
+        const month = date.getMonth()
+        // 日
+        const day = date.getDate()
+        return `${weeks[week]}, ${months[month]} ${day}`
+    }
+
     renderHeader() {
         return (
             <View style={styles.headerView}>
                 <View style={styles.headerTextView}>
                     <Text style={styles.headerTextViewTitle}>My Day</Text>
                     <Text style={styles.headerTextViewSubtitle}>
-                        Wednesday, May 17
+                        {this.formateDate()}
                     </Text>
                 </View>
             </View>
@@ -195,11 +239,24 @@ class Home extends Component {
                 <View style={styles.modalWrapper}>
                     <View style={styles.modalForm}>
                         <FormLabel>Description</FormLabel>
-                        <FormInput value={description} onChangeText={() => this.handleEdit('description')}/>
+                        <FormInput
+                            value={description}
+                            onChangeText={val =>
+                                this.handleEdit('description', val)
+                            }
+                        />
                         <FormLabel>Category</FormLabel>
-                        <FormInput value={category} />
+                        <FormInput
+                            value={category}
+                            onChangeText={val =>
+                                this.handleEdit('category', val)
+                            }
+                        />
                         <FormLabel>Notes</FormLabel>
-                        <FormInput value={notes} />
+                        <FormInput
+                            value={notes}
+                            onChangeText={val => this.handleEdit('notes', val)}
+                        />
                     </View>
                     <Button
                         raised
@@ -244,7 +301,7 @@ class Home extends Component {
                 {/*header*/}
                 <ParallaxScrollView
                     windowHeight={SCREEN_HEIGHT * 0.38}
-                    backgroundSource={require('../public/images/top_wallpaper.png')}
+                    backgroundSource={require('../public/images/IMG_0286.jpg')}
                     headerView={this.renderHeader()}>
                     {/* content */}
                 </ParallaxScrollView>
