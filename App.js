@@ -19,7 +19,22 @@ import {
 
 import TimeCounter from './src/timecounter'
 
+import SimTanTan from './src/simtantan'
+import Flix from './src/simtantan/Flix'
+
 import { Home } from './src/todolist'
+
+import {
+    AnimatedBaic1,
+    AnimatedBasic2,
+    AnimatedBasic3,
+    AnimatedBasic4,
+    AnimatedBasic5,
+    AnimatedBasic6,
+    AnimatedBasic7,
+    AnimatedBasic8,
+    AnimatedBasic9,
+} from './src/animate'
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -33,7 +48,7 @@ export default class App extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Home />
+                <SimTanTan />
             </View>
         )
     }
